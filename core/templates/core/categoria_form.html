@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{% if categoria %}Editar categoria{% else %}Nova categoria{% endif %} | SprintTasks{% endblock %}
+{% block content %}
+<div class="form-page"><p class="eyebrow">CATEGORIAS</p><h1>{% if categoria %}Editar categoria{% else %}Nova categoria{% endif %}</h1><p>Informe o nome da categoria. O campo é obrigatório.</p>
+<form method="post" class="form-card">{% csrf_token %}
+{% if form.non_field_errors %}<div class="message error">{{ form.non_field_errors }}</div>{% endif %}
+{{ form.as_p }}
+<div class="form-actions"><a class="btn secondary" href="{% url 'core:categoria_lista' %}">Cancelar</a><button class="btn primary" type="submit">Salvar</button></div></form></div>
+{% endblock %}

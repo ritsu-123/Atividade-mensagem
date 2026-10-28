@@ -1,0 +1,20 @@
+<header class="header">
+    <div class="container nav">
+
+        <a class="brand" href="{% url 'core:projeto_lista' %}">
+            Sprint<span>Tasks</span>
+        </a>
+
+        <nav>
+            <a href="{% url 'core:projeto_lista' %}">Projetos</a>
+            <a href="{% url 'core:projeto_criar' %}">Novo projeto</a>
+            <a href="{% url 'core:tarefa_lista' %}">Tarefas</a>
+            <a href="{% url 'core:tarefa_criar' %}">Nova tarefa</a>
+            <a href="{% url 'core:categoria_lista' %}">Categorias</a>
+            <a href="{% url 'core:tag_lista' %}">Tags</a>
+            <a href="{% url 'core:noticia_lista' %}">Notícias</a>
+            <a href="/admin/">Admin</a>
+        </nav>
+
+    </div>
+</header>

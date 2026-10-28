@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}
+Tarefas | SprintTasks
+{% endblock %}
+
+
+{% block content %}
+
+<div class="section-head">
+
+    <div>
+
+        <p class="eyebrow">
+            GERENCIAMENTO
+        </p>
+
+        <h1>
+            Tarefas
+        </h1>
+
+        <p>
+            Visualize, acompanhe e gerencie as tarefas
+            dos seus projetos.
+        </p>
+
+    </div>
+
+
+    <a
+        class="btn primary"
+        href="{% url 'core:tarefa_criar' %}"
+    >
+        + Nova tarefa
+    </a>
+
+</div>
+
+
+<div class="task-list">
+
+    {% for tarefa in tarefas %}
+
+        <article class="task">
+
+            <!-- Ícone de conclusão -->
+            <div
+                class="check {% if tarefa.concluido %}done{% endif %}"
+                aria-label="
+                    {% if tarefa.concluido %}
+                        Tarefa concluída
+                    {% else %}
+                        Tarefa pendente
+                    {% endif %}
+                "
+            >
+
+                {% if tarefa.concluido %}
+                    ✓
+                {% else %}
+                    <span></span>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Informações principais -->
+            <div class="task-main">
+
+                <h3
+                    class="
+                        {% if tarefa.concluido %}
+                            completed
+                        {% endif %}
+                    "
+                >
+                    {{ tarefa.titulo }}
+                </h3>
+
+
+                <p class="task-project">
+
+                    Projeto:
+
+                    <strong>
+                        {{ tarefa.projeto.nome }}
+                    </strong>
+
+                </p>
+
+            </div>
+
+
+            <!-- Prioridade -->
+            <span
+                class="priority {{ tarefa.prioridade }}"
+            >
+                {{ tarefa.get_prioridade_display }}
+            </span>
+
+
+            <!-- Status -->
+            <span class="status">
+
+                {% if tarefa.concluido %}
+
+                    Concluída
+
+                {% else %}
+
+                    Pendente
+
+                {% endif %}
+
+            </span>
+
+
+            <!-- Ações -->
+            <div class="actions-cell">
+
+                <a
+                    href="{% url 'core:tarefa_editar' tarefa.pk %}"
+                >
+                    Editar
+                </a>
+
+
+                <a
+                    href="{% url 'core:tarefa_excluir' tarefa.pk %}"
+                    class="danger-text"
+                >
+                    Excluir
+                </a>
+
+            </div>
+
+        </article>
+
+
+    {% empty %}
+
+        <!-- Estado vazio -->
+        <div class="empty task-empty">
+
+            <div class="empty-icon">
+                ✓
+            </div>
+
+            <h2>
+                Nenhuma tarefa cadastrada
+            </h2>
+
+            <p>
+                Comece criando uma tarefa para organizar
+                as atividades dos seus projetos.
+            </p>
+
+            <a
+                class="btn primary"
+                href="{% url 'core:tarefa_criar' %}"
+            >
+                + Criar primeira tarefa
+            </a>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

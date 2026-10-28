@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+    {% if tarefa %}
+        Editar Tarefa
+    {% else %}
+        Nova Tarefa
+    {% endif %}
+
+    | SprintTasks
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="form-page">
+
+    <p class="eyebrow">
+        TAREFA
+    </p>
+
+
+    {% if tarefa %}
+
+        <h1>
+            Editar tarefa
+        </h1>
+
+        <p class="form-description">
+            Atualize as informações da tarefa
+            selecionada.
+        </p>
+
+    {% else %}
+
+        <h1>
+            Nova tarefa
+        </h1>
+
+        <p class="form-description">
+            Preencha os dados abaixo para cadastrar
+            uma nova tarefa.
+        </p>
+
+    {% endif %}
+
+
+    <form
+        method="post"
+        class="form-card task-form"
+    >
+
+        {% csrf_token %}
+
+
+        <!-- TÍTULO -->
+        <div class="form-group">
+
+            <label for="{{ form.titulo.id_for_label }}">
+                {{ form.titulo.label }}
+            </label>
+
+
+            {{ form.titulo }}
+
+
+            {% if form.titulo.help_text %}
+                <small class="help-text">
+                    {{ form.titulo.help_text }}
+                </small>
+            {% endif %}
+
+
+            {% for error in form.titulo.errors %}
+
+                <span class="field-error">
+                    {{ error }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- PRIORIDADE -->
+        <div class="form-group">
+
+            <label for="{{ form.prioridade.id_for_label }}">
+                {{ form.prioridade.label }}
+            </label>
+
+
+            {{ form.prioridade }}
+
+
+            {% if form.prioridade.help_text %}
+
+                <small class="help-text">
+                    {{ form.prioridade.help_text }}
+                </small>
+
+            {% endif %}
+
+
+            {% for error in form.prioridade.errors %}
+
+                <span class="field-error">
+                    {{ error }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- PROJETO -->
+        <div class="form-group">
+
+            <label for="{{ form.projeto.id_for_label }}">
+                {{ form.projeto.label }}
+            </label>
+
+
+            {{ form.projeto }}
+
+
+            {% if form.projeto.help_text %}
+
+                <small class="help-text">
+                    {{ form.projeto.help_text }}
+                </small>
+
+            {% endif %}
+
+
+            {% for error in form.projeto.errors %}
+
+                <span class="field-error">
+                    {{ error }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- CONCLUÍDO -->
+        <div class="checkbox-group">
+
+            {{ form.concluido }}
+
+
+            <div>
+
+                <label
+                    for="{{ form.concluido.id_for_label }}"
+                >
+                    {{ form.concluido.label }}
+                </label>
+
+                <small>
+                    Marque esta opção caso a tarefa
+                    já tenha sido finalizada.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- ERROS GERAIS -->
+        {% if form.non_field_errors %}
+
+            <div class="form-errors">
+
+                {% for error in form.non_field_errors %}
+
+                    <p>
+                        {{ error }}
+                    </p>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- BOTÕES -->
+        <div class="form-actions">
+
+            <a
+                class="btn secondary"
+                href="{% url 'core:tarefa_lista' %}"
+            >
+                Cancelar
+            </a>
+
+
+            <button
+                class="btn primary"
+                type="submit"
+            >
+
+                {% if tarefa %}
+                    Salvar alterações
+                {% else %}
+                    Cadastrar tarefa
+                {% endif %}
+
+            </button>
+
+        </div>
+
+    </form>
+</div>
+{% endblock %}

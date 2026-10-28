@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Excluir tag | SprintTasks{% endblock %}
+{% block content %}
+<div class="form-page"><p class="eyebrow">EXCLUSÃO</p><h1>Excluir tag</h1><p>Tem certeza de que deseja excluir a tag <strong>{{ tag.nome }}</strong>?</p><p>A tag será removida das notícias associadas, mas as notícias não serão excluídas.</p>
+<form method="post" class="form-card">{% csrf_token %}<div class="form-actions"><a class="btn secondary" href="{% url 'core:tag_lista' %}">Cancelar</a><button class="btn danger" type="submit">Confirmar exclusão</button></div></form></div>
+{% endblock %}

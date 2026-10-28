@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Notícias | SprintTasks{% endblock %}
+{% block content %}
+<div class="section-head"><div><p class="eyebrow">CONTEÚDO</p><h1>Notícias</h1><p>Cadastre notícias para testar categorias e tags.</p></div><a class="btn primary" href="{% url 'core:noticia_criar' %}">+ Nova notícia</a></div>
+<div class="table-wrap"><table><thead><tr><th>Título</th><th>Categoria</th><th>Tags</th><th>Data</th></tr></thead><tbody>
+{% for noticia in noticias %}<tr><td><strong>{{ noticia.titulo }}</strong><br>{{ noticia.conteudo|truncatewords:18 }}</td><td>{{ noticia.categoria.nome }}</td><td>{% for tag in noticia.tags.all %}<span class="badge">{{ tag.nome }}</span>{% empty %}Sem tags{% endfor %}</td><td>{{ noticia.criada_em|date:"d/m/Y H:i" }}</td></tr>
+{% empty %}<tr><td colspan="4" class="empty">Nenhuma notícia cadastrada.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

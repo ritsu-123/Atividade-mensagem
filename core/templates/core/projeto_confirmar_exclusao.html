@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+Excluir Projeto | SprintTasks
+{% endblock %}
+
+{% block content %}
+
+<div class="form-page">
+
+    <p class="eyebrow">EXCLUSÃO</p>
+
+    <h1>Excluir projeto</h1>
+
+    <p>
+        Tem certeza que deseja excluir o projeto
+        <strong>{{ projeto.nome }}</strong>?
+    </p>
+
+    <p>
+        Essa ação não poderá ser desfeita.
+    </p>
+
+
+    <form method="post" class="form-card">
+
+        {% csrf_token %}
+
+        <div class="form-actions">
+
+            <a
+                class="btn secondary"
+                href="{% url 'core:projeto_lista' %}"
+            >
+                Cancelar
+            </a>
+
+            <button
+                type="submit"
+                class="btn danger"
+            >
+                Confirmar exclusão
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
